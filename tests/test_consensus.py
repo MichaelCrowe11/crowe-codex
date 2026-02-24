@@ -1,7 +1,7 @@
 import pytest
-from claude_codex.core.agent import Agent, AgentConfig
-from claude_codex.core.result import Stage
-from claude_codex.strategies.consensus import Consensus
+from crowe_codex.core.agent import Agent, AgentConfig
+from crowe_codex.core.result import Stage
+from crowe_codex.strategies.consensus import Consensus
 
 
 class FakeAgent(Agent):

@@ -68,7 +68,7 @@ class ConfidenceReport(BaseModel):
 
 
 class PipelineResult(BaseModel):
-    """Final output from the claude-codex pipeline."""
+    """Final output from the crowe-codex pipeline."""
 
     code: str
     stage_outputs: list[AgentOutput] = []

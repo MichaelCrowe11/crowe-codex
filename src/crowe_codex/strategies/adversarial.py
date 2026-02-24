@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from claude_codex.core.agent import Agent
-from claude_codex.core.result import Stage
-from claude_codex.strategies.base import Strategy
+from crowe_codex.core.agent import Agent
+from crowe_codex.core.result import Stage
+from crowe_codex.strategies.base import Strategy
 
 
 class Adversarial(Strategy):

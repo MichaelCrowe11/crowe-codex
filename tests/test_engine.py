@@ -1,8 +1,8 @@
 import pytest
-from claude_codex.core.agent import AgentConfig
-from claude_codex.core.engine import DualEngine
-from claude_codex.core.result import PipelineResult
-from claude_codex.strategies.consensus import Consensus
+from crowe_codex.core.agent import AgentConfig
+from crowe_codex.core.engine import DualEngine
+from crowe_codex.core.result import PipelineResult
+from crowe_codex.strategies.consensus import Consensus
 
 
 class FakeAgent:

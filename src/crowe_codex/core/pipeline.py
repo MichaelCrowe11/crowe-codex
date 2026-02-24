@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from claude_codex.core.result import Stage
+from crowe_codex.core.result import Stage
 
 STAGE_PRESETS: dict[str, list[Stage]] = {
     "trivial": [Stage.ARCHITECT, Stage.DISPATCH],

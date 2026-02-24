@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "claude-codex"
-version = "0.1.0"
+name = "crowe-codex"
+version = "0.5.0"
 description = "Cross-vendor adversarial AI code verification engine"
 readme = "README.md"
 license = "MIT"
@@ -45,15 +45,15 @@ nim = [
 ]
 
 [project.scripts]
-claude-codex = "claude_codex.cli:main"
+crowe-codex = "crowe_codex.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/crowelogic/claude-codex"
-Documentation = "https://github.com/crowelogic/claude-codex#readme"
-Issues = "https://github.com/crowelogic/claude-codex/issues"
+Homepage = "https://github.com/MichaelCrowe11/crowe-codex"
+Documentation = "https://github.com/MichaelCrowe11/crowe-codex#readme"
+Issues = "https://github.com/MichaelCrowe11/crowe-codex/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/claude_codex"]
+packages = ["src/crowe_codex"]
 
 [tool.ruff]
 target-version = "py311"

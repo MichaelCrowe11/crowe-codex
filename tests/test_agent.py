@@ -1,6 +1,6 @@
 import pytest
 
-from claude_codex.core.agent import Agent, AgentConfig, AgentRegistry
+from crowe_codex.core.agent import Agent, AgentConfig, AgentRegistry
 
 
 def test_agent_is_abstract():

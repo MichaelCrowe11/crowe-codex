@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from claude_codex.core.agent import Agent, AgentConfig
+from crowe_codex.core.agent import Agent, AgentConfig
 
 
 class NimAgent(Agent):

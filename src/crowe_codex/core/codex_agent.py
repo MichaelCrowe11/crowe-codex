@@ -6,7 +6,7 @@ import json
 
 from openai import AsyncOpenAI
 
-from claude_codex.core.agent import Agent, AgentConfig
+from crowe_codex.core.agent import Agent, AgentConfig
 
 DEFAULT_MODEL = "gpt-5.3"
 
@@ -44,7 +44,7 @@ class CodexAgent(Agent):
     def build_builder_prompt(self, blueprint: dict[str, object]) -> str:
         blueprint_text = json.dumps(blueprint, indent=2)
         return (
-            "You are the BUILDER stage of the claude-codex pipeline.\n\n"
+            "You are the BUILDER stage of the crowe-codex pipeline.\n\n"
             "Your role:\n"
             "1. Implement the code according to the architect's blueprint\n"
             "2. Write comprehensive test suites\n"

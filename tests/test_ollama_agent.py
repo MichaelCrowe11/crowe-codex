@@ -1,5 +1,5 @@
-from claude_codex.core.agent import AgentConfig
-from claude_codex.core.ollama_agent import OllamaAgent, DeepParallelRouter
+from crowe_codex.core.agent import AgentConfig
+from crowe_codex.core.ollama_agent import OllamaAgent, DeepParallelRouter
 
 
 def test_ollama_agent_instantiation():

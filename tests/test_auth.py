@@ -1,4 +1,4 @@
-from claude_codex.core.auth import AuthManager, ProviderAuth
+from crowe_codex.core.auth import AuthManager, ProviderAuth
 
 
 def test_provider_auth_from_env_key(monkeypatch):

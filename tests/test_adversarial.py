@@ -1,7 +1,7 @@
 import pytest
-from claude_codex.core.agent import Agent, AgentConfig
-from claude_codex.core.result import Stage
-from claude_codex.strategies.adversarial import Adversarial
+from crowe_codex.core.agent import Agent, AgentConfig
+from crowe_codex.core.result import Stage
+from crowe_codex.strategies.adversarial import Adversarial
 
 
 class FakeAgent(Agent):

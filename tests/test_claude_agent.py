@@ -1,5 +1,5 @@
-from claude_codex.core.agent import AgentConfig
-from claude_codex.core.claude_agent import ClaudeAgent
+from crowe_codex.core.agent import AgentConfig
+from crowe_codex.core.claude_agent import ClaudeAgent
 
 
 def test_claude_agent_instantiation():

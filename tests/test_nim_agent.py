@@ -1,6 +1,6 @@
 import asyncio
-from claude_codex.core.agent import AgentConfig
-from claude_codex.core.nim_agent import NimAgent
+from crowe_codex.core.agent import AgentConfig
+from crowe_codex.core.nim_agent import NimAgent
 
 
 def test_nim_agent_instantiation():

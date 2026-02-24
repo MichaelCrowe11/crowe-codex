@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from claude_codex.core.result import (
+from crowe_codex.core.result import (
     AgentOutput,
     ConfidenceReport,
     PipelineResult,
     SecurityAttestation,
     Stage,
 )
-from claude_codex.strategies.base import Strategy
+from crowe_codex.strategies.base import Strategy
 
 AGENT_STAGE_MAP: dict[str, list[int]] = {
     "claude": [1, 5],
@@ -21,7 +21,7 @@ AGENT_STAGE_MAP: dict[str, list[int]] = {
 
 
 class DualEngine:
-    """The claude-codex pipeline orchestration engine."""
+    """The crowe-codex pipeline orchestration engine."""
 
     def __init__(self, auto_detect: bool = True) -> None:
         self._agents: dict[str, object] = {}

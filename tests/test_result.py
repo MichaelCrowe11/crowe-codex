@@ -1,4 +1,4 @@
-from claude_codex.core.result import (
+from crowe_codex.core.result import (
     AgentOutput,
     ConfidenceReport,
     PipelineResult,

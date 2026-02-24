@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from ollama import AsyncClient
 
-from claude_codex.core.agent import Agent, AgentConfig
+from crowe_codex.core.agent import Agent, AgentConfig
 
 DEFAULT_MODEL = "Mcrowe1210/DeepParallel"
 
@@ -91,7 +91,7 @@ class OllamaAgent(Agent):
 
     def build_specialist_prompt(self, code: str, task: str) -> str:
         return (
-            "You are the SPECIALIST stage of the claude-codex pipeline.\n\n"
+            "You are the SPECIALIST stage of the crowe-codex pipeline.\n\n"
             "Your role:\n"
             "1. Review this code for domain-specific correctness\n"
             "2. Fuzz test inputs and identify edge cases\n"

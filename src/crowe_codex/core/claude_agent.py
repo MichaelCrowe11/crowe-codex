@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from anthropic import AsyncAnthropic
 
-from claude_codex.core.agent import Agent, AgentConfig
+from crowe_codex.core.agent import Agent, AgentConfig
 
 DEFAULT_MODEL = "claude-opus-4-6"
 
@@ -36,7 +36,7 @@ class ClaudeAgent(Agent):
 
     def build_architect_prompt(self, task: str) -> str:
         return (
-            "You are the ARCHITECT stage of the claude-codex pipeline.\n\n"
+            "You are the ARCHITECT stage of the crowe-codex pipeline.\n\n"
             "Your role:\n"
             "1. Decompose this task into atomic subtasks\n"
             "2. Define the architectural plan with types and interfaces\n"
@@ -55,7 +55,7 @@ class ClaudeAgent(Agent):
             f"=== {stage} ===\n{output}" for stage, output in stage_outputs.items()
         )
         return (
-            "You are the DISPATCH stage (final gate) of the claude-codex pipeline.\n\n"
+            "You are the DISPATCH stage (final gate) of the crowe-codex pipeline.\n\n"
             "Your role:\n"
             "1. Verify the final code matches the original architectural intent\n"
             "2. Perform OWASP Top 10 security sweep\n"

@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from claude_codex.core.agent import Agent
-from claude_codex.core.result import Stage
+from crowe_codex.core.agent import Agent
+from crowe_codex.core.result import Stage
 
 
 class Strategy(ABC):
