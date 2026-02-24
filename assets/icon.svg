@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="50%" stop-color="#6B21A8"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="beakGrad" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#2563EB" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="circuitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#60A5FA" stop-opacity="0.6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#0C0C1D"/>
+
+  <!-- Outer ring -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="url(#ringGrad)" stroke-width="3" opacity="0.35"/>
+
+  <!-- Subtle grid pattern for tech feel -->
+  <g opacity="0.04" stroke="#fff" stroke-width="0.5">
+    <line x1="128" y1="0" x2="128" y2="512"/>
+    <line x1="256" y1="0" x2="256" y2="512"/>
+    <line x1="384" y1="0" x2="384" y2="512"/>
+    <line x1="0" y1="128" x2="512" y2="128"/>
+    <line x1="0" y1="256" x2="512" y2="256"/>
+    <line x1="0" y1="384" x2="512" y2="384"/>
+  </g>
+
+  <!-- Crow — geometric faceted design -->
+  <g transform="translate(96, 80)">
+    <!-- Main body — faceted polygon crow facing right -->
+    <!-- Head -->
+    <polygon points="210,80 240,60 270,72 260,100 230,105 210,95"
+             fill="url(#bodyGrad)" opacity="0.95"/>
+    <!-- Crown/top of head -->
+    <polygon points="210,80 230,55 250,50 240,60 210,80"
+             fill="#7C3AED" opacity="0.9"/>
+    <!-- Upper neck -->
+    <polygon points="210,95 230,105 220,130 195,120"
+             fill="url(#bodyGrad)" opacity="0.92"/>
+    <!-- Chest -->
+    <polygon points="195,120 220,130 230,170 215,200 180,190 170,155"
+             fill="url(#bodyGrad)" opacity="0.88"/>
+    <!-- Belly -->
+    <polygon points="170,155 180,190 215,200 220,240 185,260 145,240 135,195"
+             fill="#5B21B6" opacity="0.85"/>
+    <!-- Back -->
+    <polygon points="210,80 195,120 170,155 135,195 120,170 140,120 175,85"
+             fill="#4C1D95" opacity="0.9"/>
+    <!-- Wing — main surface -->
+    <polygon points="120,170 135,195 145,240 130,280 90,290 60,260 55,210 75,175 100,160"
+             fill="url(#bodyGrad)" opacity="0.9"/>
+    <!-- Wing — secondary feathers -->
+    <polygon points="60,260 90,290 80,320 45,310 30,280 40,255"
+             fill="#4C1D95" opacity="0.88"/>
+    <!-- Wing tip feathers -->
+    <polygon points="30,280 45,310 35,340 15,325 10,295"
+             fill="#3B0764" opacity="0.85"/>
+    <!-- Tail -->
+    <polygon points="185,260 220,240 240,270 230,310 195,320 165,295 160,270"
+             fill="#5B21B6" opacity="0.87"/>
+    <polygon points="195,320 230,310 245,340 220,360 190,345"
+             fill="#4C1D95" opacity="0.82"/>
+
+    <!-- Beak — sharp, angular -->
+    <polygon points="270,72 310,62 305,78 275,88 260,100 270,72"
+             fill="url(#beakGrad)"/>
+    <line x1="270" y1="82" x2="305" y2="72" stroke="#1E40AF" stroke-width="1" opacity="0.5"/>
+
+    <!-- Eye — sharp, intelligent -->
+    <circle cx="245" cy="82" r="12" fill="#0C0C1D"/>
+    <circle cx="245" cy="82" r="8" fill="#fff" opacity="0.95"/>
+    <circle cx="247" cy="80" r="4.5" fill="#0C0C1D"/>
+    <circle cx="249" cy="78" r="1.5" fill="#fff" opacity="0.9"/>
+
+    <!-- Circuit traces on body — subtle tech integration -->
+    <g filter="url(#glow)">
+      <!-- Chest circuit -->
+      <line x1="190" y1="145" x2="210" y2="155" stroke="url(#circuitGrad)" stroke-width="1.5"/>
+      <line x1="210" y1="155" x2="210" y2="180" stroke="url(#circuitGrad)" stroke-width="1.5"/>
+      <line x1="210" y1="180" x2="195" y2="195" stroke="url(#circuitGrad)" stroke-width="1.5"/>
+      <circle cx="190" cy="145" r="3" fill="#A78BFA" opacity="0.7"/>
+      <circle cx="210" cy="155" r="3" fill="#818CF8" opacity="0.7"/>
+      <circle cx="210" cy="180" r="3" fill="#60A5FA" opacity="0.7"/>
+      <circle cx="195" cy="195" r="3" fill="#38BDF8" opacity="0.7"/>
+
+      <!-- Wing circuit -->
+      <line x1="100" y1="195" x2="120" y2="210" stroke="url(#circuitGrad)" stroke-width="1.5"/>
+      <line x1="120" y1="210" x2="115" y2="240" stroke="url(#circuitGrad)" stroke-width="1.5"/>
+      <line x1="115" y1="240" x2="130" y2="255" stroke="url(#circuitGrad)" stroke-width="1.5"/>
+      <circle cx="100" cy="195" r="3" fill="#A78BFA" opacity="0.7"/>
+      <circle cx="120" cy="210" r="3" fill="#818CF8" opacity="0.7"/>
+      <circle cx="115" cy="240" r="3" fill="#60A5FA" opacity="0.7"/>
+      <circle cx="130" cy="255" r="3" fill="#38BDF8" opacity="0.7"/>
+
+      <!-- Back circuit -->
+      <line x1="150" y1="115" x2="155" y2="140" stroke="url(#circuitGrad)" stroke-width="1.2"/>
+      <line x1="155" y1="140" x2="140" y2="155" stroke="url(#circuitGrad)" stroke-width="1.2"/>
+      <circle cx="150" cy="115" r="2.5" fill="#C4B5FD" opacity="0.6"/>
+      <circle cx="155" cy="140" r="2.5" fill="#A78BFA" opacity="0.6"/>
+      <circle cx="140" cy="155" r="2.5" fill="#818CF8" opacity="0.6"/>
+    </g>
+
+    <!-- Facet highlight lines -->
+    <g stroke="#fff" stroke-width="0.5" opacity="0.08">
+      <line x1="210" y1="80" x2="195" y2="120"/>
+      <line x1="195" y1="120" x2="170" y2="155"/>
+      <line x1="170" y1="155" x2="145" y2="240"/>
+      <line x1="120" y1="170" x2="60" y2="260"/>
+      <line x1="180" y1="190" x2="185" y2="260"/>
+    </g>
+  </g>
+
+  <!-- Code brackets — positioned at bottom corners -->
+  <g font-family="'SF Mono','Fira Code','JetBrains Mono',monospace" font-size="36" font-weight="300" opacity="0.2">
+    <text x="60" y="460" fill="#7C3AED">&lt;/&gt;</text>
+    <text x="390" y="460" fill="#2563EB">{...}</text>
+  </g>
+</svg>

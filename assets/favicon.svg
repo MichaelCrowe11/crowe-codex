@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="#0C0C1D"/>
+  <!-- Simplified crow silhouette for 32px -->
+  <g transform="translate(3, 3) scale(0.17)">
+    <polygon points="210,80 240,60 270,72 260,100 230,105 210,95" fill="url(#fg)"/>
+    <polygon points="210,80 230,55 250,50 240,60 210,80" fill="#7C3AED"/>
+    <polygon points="210,95 230,105 220,130 195,120" fill="url(#fg)"/>
+    <polygon points="195,120 220,130 230,170 215,200 180,190 170,155" fill="url(#fg)"/>
+    <polygon points="170,155 180,190 215,200 220,240 185,260 145,240 135,195" fill="#5B21B6"/>
+    <polygon points="210,80 195,120 170,155 135,195 120,170 140,120 175,85" fill="#4C1D95"/>
+    <polygon points="120,170 135,195 145,240 130,280 90,290 60,260 55,210 75,175 100,160" fill="url(#fg)"/>
+    <polygon points="60,260 90,290 80,320 45,310 30,280 40,255" fill="#4C1D95"/>
+    <polygon points="185,260 220,240 240,270 230,310 195,320 165,295 160,270" fill="#5B21B6"/>
+    <polygon points="270,72 310,62 305,78 275,88 260,100 270,72" fill="#38BDF8"/>
+    <circle cx="245" cy="82" r="10" fill="#fff"/>
+    <circle cx="247" cy="80" r="5" fill="#0C0C1D"/>
+  </g>
+</svg>
