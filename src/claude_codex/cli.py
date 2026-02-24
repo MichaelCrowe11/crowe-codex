@@ -109,7 +109,7 @@ def _print_result(result) -> None:
     console.print(table)
 
     if result.code:
-        console.print(f"\n[bold]Output:[/bold]")
+        console.print("\n[bold]Output:[/bold]")
         console.print(result.code[:1000])
 
 

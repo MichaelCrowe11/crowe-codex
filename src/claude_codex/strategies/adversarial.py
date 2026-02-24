@@ -75,9 +75,9 @@ class Adversarial(Strategy):
         dispatch_prompt = (
             f"Final verification. Review code that survived adversarial testing.\n\n"
             f"Final code:\n```\n{build_output}\n```\n\n"
-            f"Attacks it survived:\n" + "\n".join(all_attacks) + "\n\n"
-            f"Fuzz tests it survived:\n" + "\n".join(all_fuzzes) + "\n\n"
-            f"Provide final verdict and confidence score."
+            f"Attacks it survived:\n{chr(10).join(all_attacks)}\n\n"
+            f"Fuzz tests it survived:\n{chr(10).join(all_fuzzes)}\n\n"
+            "Provide final verdict and confidence score."
         )
         dispatch_output = await dispatch.execute(dispatch_prompt)
 

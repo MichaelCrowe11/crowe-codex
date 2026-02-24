@@ -74,6 +74,6 @@ async def test_adversarial_single_round_no_fix():
         "dispatch": FakeAgent("approved"),
     }
     strategy = Adversarial(rounds=1)
-    result = await strategy.execute("simple task", agents)
+    await strategy.execute("simple task", agents)
     # Single round: build once, no fix needed
     assert builder.call_count == 1
