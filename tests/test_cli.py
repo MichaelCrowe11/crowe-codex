@@ -6,7 +6,7 @@ def test_cli_version():
     runner = CliRunner()
     result = runner.invoke(main, ["--version"])
     assert result.exit_code == 0
-    assert "0.5.0" in result.output
+    assert "1.0.0" in result.output
 
 
 def test_cli_help():
