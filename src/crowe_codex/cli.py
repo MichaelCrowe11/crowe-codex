@@ -98,21 +98,118 @@ def auto(task: str, preset: str) -> None:
 
 
 @main.command(name="verify-deps")
-@click.argument("path")
-def verify_deps(path: str) -> None:
+@click.argument("deps", nargs=-1, required=True)
+@click.option("--ecosystem", "-e", default="pypi", help="Package ecosystem (pypi, npm)")
+def verify_deps(deps: tuple[str, ...], ecosystem: str) -> None:
     """Verify supply chain safety of dependencies."""
-    console.print(Panel(f"[bold]Supply Chain Verification[/bold]: {path}", style="yellow"))
-    console.print("[dim]Coming in v1.0.0[/dim]")
+    console.print(Panel("[bold]Supply Chain Verification[/bold]", style="yellow"))
+    console.print(f"[dim]Checking {len(deps)} dependencies ({ecosystem})[/dim]")
+    asyncio.run(_run_supply_chain(list(deps), ecosystem))
 
 
 @main.command(name="security-audit")
-@click.option("--compliance", "-c", multiple=True, help="Compliance frameworks (soc2, hipaa, pci-dss)")
-@click.option("--target", "-t", default=".", help="Target directory")
-def security_audit(compliance: tuple[str, ...], target: str) -> None:
-    """Run a full security audit."""
-    console.print(Panel(f"[bold]Security Audit[/bold]: {target}", style="yellow"))
-    console.print(f"[dim]Compliance: {', '.join(compliance) or 'general'}[/dim]")
-    console.print("[dim]Coming in v1.0.0[/dim]")
+@click.argument("code_or_file")
+@click.option("--compliance", "-c", multiple=True, help="Compliance frameworks (soc2, hipaa, pci_dss)")
+@click.option("--owasp/--no-owasp", default=True, help="Run OWASP Top 10 scan")
+@click.option("--threats/--no-threats", default=True, help="Run threat modeling")
+def security_audit(
+    code_or_file: str, compliance: tuple[str, ...],
+    owasp: bool, threats: bool,
+) -> None:
+    """Run a full security audit on code or a file."""
+    console.print(Panel("[bold]Security Audit[/bold]", style="yellow"))
+    console.print(f"[dim]OWASP: {'ON' if owasp else 'OFF'} | Threats: {'ON' if threats else 'OFF'} | Compliance: {', '.join(compliance) or 'general'}[/dim]")
+    asyncio.run(_run_security_audit(code_or_file, list(compliance), owasp, threats))
+
+
+async def _run_supply_chain(deps: list[str], ecosystem: str) -> None:
+    """Run supply chain verification."""
+    from crowe_codex.core.engine import DualEngine
+    from crowe_codex.security.supply_chain import SupplyChainVerifier
+
+    engine = DualEngine()
+    try:
+        verifier = SupplyChainVerifier(engine._agents)
+        result = await verifier.verify(deps, ecosystem)
+        console.print(f"\n[bold]{result.summary}[/bold]")
+        for dep in result.dependencies:
+            status = "[green]SAFE[/green]" if dep.risk_level == "safe" else f"[red]{dep.risk_level.upper()}[/red]"
+            console.print(f"  {dep.name}: {status}")
+        if result.slopsquatting_suspects:
+            console.print(f"\n[red]Slopsquatting suspects: {', '.join(result.slopsquatting_suspects)}[/red]")
+    except Exception as e:
+        console.print(f"[red]Error: {e}[/red]")
+
+
+async def _run_security_audit(
+    code_or_file: str, compliance_frameworks: list[str],
+    run_owasp: bool, run_threats: bool,
+) -> None:
+    """Run a comprehensive security audit."""
+    from pathlib import Path
+    from crowe_codex.core.engine import DualEngine
+    from crowe_codex.security.attestation import AttestationGenerator
+
+    # Read code from file or use as literal
+    code = code_or_file
+    if Path(code_or_file).exists():
+        code = Path(code_or_file).read_text()
+
+    engine = DualEngine()
+    agents = engine._agents
+    owasp_report = None
+    threat_model = None
+    compliance_report = None
+
+    try:
+        if run_owasp and agents:
+            from crowe_codex.security.owasp import OWASPScanner
+            scanner = OWASPScanner(agents)
+            owasp_report = await scanner.scan(code)
+            console.print(f"[bold]{owasp_report.summary}[/bold]")
+
+        if run_threats and agents:
+            from crowe_codex.security.threat_model import ThreatModelEngine
+            threat_engine = ThreatModelEngine(agents)
+            threat_model = await threat_engine.analyze(code)
+            console.print(f"[bold]{threat_model.summary}[/bold]")
+
+        if compliance_frameworks and agents:
+            from crowe_codex.security.compliance import ComplianceMapper
+            mapper = ComplianceMapper(agents)
+            compliance_report = await mapper.assess(code, frameworks=compliance_frameworks)
+            console.print(f"[bold]{compliance_report.summary}[/bold]")
+
+        gen = AttestationGenerator()
+        attestation = gen.generate(
+            code=code,
+            owasp=owasp_report,
+            threat_model=threat_model,
+            compliance=compliance_report,
+            agents_used=list(agents.keys()),
+            strategy="security_audit",
+        )
+
+        # Print attestation report
+        table = Table(title="Security Attestation", show_lines=True)
+        table.add_column("Check", style="cyan", width=25)
+        table.add_column("Result", style="green", width=30)
+
+        table.add_row("Overall Score", f"[bold]{attestation.overall_score}/100[/bold]")
+        table.add_row("Verdict", f"[bold]{attestation.verdict}[/bold]")
+
+        if owasp_report:
+            table.add_row("OWASP Clean", "[green]YES[/green]" if owasp_report.is_clean else f"[red]NO ({owasp_report.vulnerability_count} issues)[/red]")
+        if threat_model:
+            table.add_row("Threats", f"{len(threat_model.threats)} ({len(threat_model.critical_threats)} critical)")
+        if compliance_report:
+            table.add_row("Compliance", f"{compliance_report.pass_rate:.0%} pass rate")
+
+        console.print(table)
+
+    except Exception as e:
+        console.print(f"[red]Error: {e}[/red]")
+        console.print("[dim]Ensure API keys are configured. Run: crowe-codex --help[/dim]")
 
 
 @main.command()
