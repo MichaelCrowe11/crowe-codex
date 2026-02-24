@@ -235,6 +235,67 @@ def strategies() -> None:
     console.print(table)
 
 
+@main.command()
+@click.option("--query", "-q", default="", help="Search query")
+@click.option("--tag", "-t", multiple=True, help="Filter by tag")
+def marketplace(query: str, tag: tuple[str, ...]) -> None:
+    """Browse the strategy marketplace."""
+    from crowe_codex.cloud.marketplace import StrategyMarketplace
+
+    mp = StrategyMarketplace()
+    results = mp.browse(query=query, tags=list(tag) if tag else None)
+
+    table = Table(title="Strategy Marketplace", show_lines=True)
+    table.add_column("Name", style="cyan", width=20)
+    table.add_column("Description", style="white", width=45)
+    table.add_column("Author", style="green", width=15)
+    table.add_column("Rating", style="yellow", width=8)
+
+    for listing in results:
+        rating_str = f"{listing.rating:.1f}/5" if listing.rating_count > 0 else "—"
+        table.add_row(listing.display_name, listing.description[:45], listing.author, rating_str)
+
+    console.print(table)
+    console.print(f"\n[dim]{len(results)} strategies | Tags: {', '.join(mp.categories)}[/dim]")
+
+
+@main.command()
+@click.option("--team", default="default", help="Team ID")
+def dashboard(team: str) -> None:
+    """View team security dashboard."""
+    from crowe_codex.cloud.dashboard import DashboardStore
+
+    store = DashboardStore(team_id=team)
+    summary = store.get_summary()
+
+    console.print(Panel(f"[bold]Team Dashboard[/bold]: {team}", style="blue"))
+
+    table = Table(show_lines=True)
+    table.add_column("Metric", style="cyan", width=25)
+    table.add_column("Value", style="green", width=20)
+
+    table.add_row("Total Projects", str(summary["total_projects"]))
+    table.add_row("Total Runs", str(summary["total_runs"]))
+    table.add_row("Avg Security Score", f"{summary['average_security_score']}/100")
+    table.add_row("Avg Confidence Score", f"{summary['average_confidence_score']}/100")
+    table.add_row("OWASP Compliance", summary["owasp_compliance_rate"])
+
+    console.print(table)
+
+    if summary["projects"]:
+        proj_table = Table(title="Projects", show_lines=True)
+        proj_table.add_column("Project", style="cyan")
+        proj_table.add_column("Latest Score", style="green")
+        proj_table.add_column("Trend", style="yellow")
+        proj_table.add_column("Runs", style="white")
+
+        for name, info in summary["projects"].items():
+            trend_icon = {"improving": "[green]UP[/green]", "declining": "[red]DOWN[/red]", "stable": "—"}.get(info["trend"], "—")
+            proj_table.add_row(name, str(info["latest_score"]), trend_icon, str(info["runs"]))
+
+        console.print(proj_table)
+
+
 async def _run_strategy(strategy_name: str, task: str, **kwargs) -> None:
     """Run a named strategy through the engine."""
     from crowe_codex.core.engine import DualEngine

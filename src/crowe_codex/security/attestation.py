@@ -155,7 +155,7 @@ class SecurityAttestation:
 class AttestationGenerator:
     """Generates security attestations by orchestrating all security modules."""
 
-    def __init__(self, version: str = "1.0.0") -> None:
+    def __init__(self, version: str = "2.0.0") -> None:
         self._version = version
 
     def generate(
