@@ -82,12 +82,15 @@ import asyncio
 from crowe_codex import DualEngine
 from crowe_codex.strategies import Adversarial
 
-engine = DualEngine()
-result = asyncio.run(engine.run(Adversarial(rounds=2), task="implement rate limiter"))
+async def main():
+    engine = DualEngine()
+    result = await engine.run(Adversarial(rounds=2), task="implement rate limiter")
 
-print(result.confidence.score)             # 0-100
-print(result.confidence.cross_vendor_agreement)  # 0.0-1.0
-print(result.confidence.owasp_clean)       # True/False
+    print(result.confidence.score)                  # 0-100
+    print(result.confidence.cross_vendor_agreement)  # 0.0-1.0
+    print(result.confidence.owasp_clean)             # True/False
+
+asyncio.run(main())
 ```
 
 ## Security Suite
@@ -167,10 +170,10 @@ class MyStrategy(Strategy):
 Set your API keys:
 
 ```bash
-export ANTHROPIC_API_KEY="sk-ant-..."    # Claude (Stages 1 & 5)
-export OPENAI_API_KEY="sk-..."           # Codex (Stage 2)
-export NVIDIA_NIM_API_KEY="nvapi-..."    # NIM (Stage 4, optional)
-# Ollama runs locally — no key needed    # DeepParallel (Stage 3)
+export ANTHROPIC_API_KEY="your-key"      # Claude (Stages 1 & 5)
+export OPENAI_API_KEY="your-key"         # Codex (Stage 2)
+export NVIDIA_NIM_API_KEY="your-key"     # NIM (Stage 4, optional)
+# Ollama runs locally — no key needed   # DeepParallel (Stage 3)
 ```
 
 ## Architecture

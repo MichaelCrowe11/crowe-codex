@@ -12,7 +12,7 @@ requires-python = ">=3.11"
 authors = [
     { name = "Michael Crowe", email = "crowelogic@users.noreply.github.com" },
 ]
-keywords = ["ai", "security", "code-verification", "claude", "codex", "adversarial"]
+keywords = ["ai", "security", "code-verification", "cross-vendor", "adversarial", "multi-agent"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
